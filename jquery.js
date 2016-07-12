@@ -2,12 +2,10 @@ function DMXpatcher(dmxStart,fixChains,numFix,fixNumStart){
 //TO DO: need to check boundaries on dmx
 
   if (dmxStart < 1){
-    console.log("Please enter a value for dmx start that is greater than 0.");
-    return;
+    return "Please enter a value for dmx start that is greater than 0.";
   }
   if ( fixNumStart + numFix > 512 ){
-    console.log("DMX cannot exceed 512, Please try again.");
-    return;
+    return "DMX cannot exceed 512, Please try again.";
   }
   var valuesArray = [];
   for (var i = 0; i < numFix; i++) {
@@ -19,16 +17,20 @@ function DMXpatcher(dmxStart,fixChains,numFix,fixNumStart){
 }
 
 
-
 $('document').ready(function(){
-var tableData = [];
-    $('#getval').click(function(){
-        tableData.push(DMXpatcher(
+
+    $('#getval').click(function(e){
+      var tableData = [];
+      e.preventDefault();
+      tableData.push(DMXpatcher(
         parseInt($('#dmxstart').val(),10),
         parseInt($('#fixchains').val(),10),
         parseInt($('#numfix').val(),10),
         parseInt($('#fixnumstart').val(),10)
       ));
-      alert(tableData);
+
+      $('#my-table').html('<table>' + tableData[0].map((item) => {
+        return '<tr><td>'+item[0]+'</td><td>'+item[1]+'</td></tr>';
+      }).join('') + '</table>');
     });
 });

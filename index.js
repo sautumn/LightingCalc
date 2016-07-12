@@ -1,10 +1,11 @@
 //DMX Patcher
+//Functions, not linked to index.html
 function DMXpatcher(dmxStart,fixChains,numFix,fixNumStart){
 //TO DO: need to check boundaries on dmx
 
   if (dmxStart < 1){
     console.log("Please enter a value for dmx start that is greater than 0.");
-    return
+    return;
   }
   if ( fixNumStart + numFix > 512 ){
     console.log("DMX cannot exceed 512, Please try again.");
